@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Work Envelope</title>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
+
+  <!-- normal script imports etc  -->
+  <script src="scripts/jquery.js"></script>
+
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link rel="stylesheet" href="css/jquery-ui.min.css">
+  <script src="./libraries/jquery.dd.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+
+  <script language="javascript" src="libraries/quicksettings.js"></script>
+
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" />
+  <link rel="stylesheet" type="text/css" href="css/msdropdown/dd.css" />
+  <!-- Insert this line after script imports -->
+  <script>if (window.module) module = window.module;</script>
+
+
+
+</head>
+
+
+<body>
+
+
+  <div id="container" class="container">
+
+    <h1>Work Envelope Shaper</h1>
+
+    <button id="btn_info" class="btn btn-info">info</button>
+    <div id="info">
+      <h2>Overview and test instructions</h2>
+      <h3>Overview</h3>
+      <P></P>
+      Estmation is a pain. A necessity but still a pain. Like foreplay is to sex.
+      <P></P>
+      In software teams estimation is done by measuring the perceived complexity of a task.
+      <p></p>
+      Complexity can be split into design and effort to deliver. The design may be forwards or backwards when reverse engineering is needed.
+      <p></p>
+      This simple realisation allows the task to be profiled as design and delivery phases. They are preceeded by a scan phase and succeeded by a value phase. It looks like this.
+      <p></p>
+      At the slight risk of sounding hereticall to the accepted wisdom of team players I ask you to consider personal value.<br />
+      Subsequent versions will incorporate four different values: Customer, Strategic, Operational and Team. For now put yourself first!
+      <p></p>
+      The way I start estimating is by doing a gut feel pass to associate profiles with the task. It is very quick. A day or two later I return and pay attention to tasks that need more consideration.
+
+      <h3>Aim - Get feedback on ease of use for first pass estimate</h3>
+      <P></P>
+      In the table below are tasks that can be used to test the concept.
+      <p></p>
+      Thinking Fast and Slow is a popular way of considering estimation. Here we focus on thinking fast.
+
+      This would be done prior to starting any work say by perhaps a week.
+      <p></p>
+      <h3>Instructions</h3>
+      <ol>
+        <li>In the shape column select a profile for the ost intuitive profile of the task</li>
+        <li>Select and move to the next</li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ol>
+      Preloaded backlog for an ecom team two week sprint
+      <p></p>
+      <button id="btn_info" class="btn btn-info">Close</button>
+    </div>
+    <P></P>
+
+    <!-- Start of app -->
+    <!-- <div id="drag-file">
+      <p>Drag your files here</p>
+    </div> -->
+    <P></P>
+    <h4>12 basic profiles - assign form the drop-down</h4>
+    <div class="row">
+      <div class="col col-lg-3"><img src="./images/mallet.png">Fast, no value</div>
+      <div class="col col-lg-3"><img src="./images/bass.png">Medium Design & effort. No value</div>
+      <div class="col col-lg-3"><img src="./images/keyboards.png">Long, no value</div>
+      <div class="col col-lg-3"><img src="./images/guitar.png">Chore</div>
+    </div>
+    <p></p>
+    <div class="row">
+      <div class="col col-lg-3"><img src="./images/drum.png">Maintenance Fix</div>
+      <div class="col col-lg-3"><img src="./images/strings.png">Design and Value #1</div>
+      <div class="col col-lg-3"><img src="./images/horns.png">Design and Value #2</div>
+      <div class="col col-lg-3"><img src="./images/woodwind.png">Design and Value #2</div>
+    </div>
+    <p></p>
+    <div class="row">
+      <div class="col col-lg-3"><img src="./images/synth-basic.png">Generic</div>
+      <div class="col col-lg-3"><img src="./images/synth-lead.png">Non Functional Requirement</div>
+      <div class="col col-lg-3"><img src="./images/synth-pad.png">High Effort & Value</div>
+      <div class="col col-lg-3"><img src="./images/synth-texture.png">At the Max</div>
+    </div>
+    <p></p>
+
+    <hr />
+    <p></p>
+    <div id="backlog" class="row">
+
+
+      <table id="tblBacklog" class="table">
+        <thead>
+          <th>Id</th>
+          <th>Description</th>
+          <th>Priority</th>
+          <th>Story Points</th>
+          <th>Complexity</th>
+          <th>Profile</th>
+        </thead>
+        <tbody>
+
+
+          <tr>
+              <td>1</td>
+              <td>Temporarily Remove Ingredients Link from PDP on PROD branch</td>
+              <td>3</td>
+              <td>2</td>
+              <td>?</td>
+              <td>
+                  <select class="payments" style="width:300px;">
+                      <option selected value="0" data-image="./images/blank.png" data-description=""></option>
+                      <option value="1" data-image="./images/mallet.png" data-description="">Fast, no value</option>
+                      <option value="2" data-image="./images/bass.png">Medium Design & effort. No value</option>
+                      <option value="3" data-image="./images/keyboards.png" data-description="">Long, no value</option>
+                      <option value="4" data-image="./images/guitar.png" data-description="">Chore</option>
+                      <option value="5" data-image="./images/drum.png" data-description="">DevOps Value</option>
+
+                      <option value="6" data-image="./images/strings.png" data-description="">Design and Value 1</option>
+                      <option value="7" data-image="./images/horns.png" data-description="">Design and Value 2</option>
+                      <option value="8" data-image="./images/woodwind.png" data-description="">Design and Value 3</option>
+
+                      <option value="9" data-image="./images/synth-basic.png" data-description="">Generic</option>
+                      <option value="10" data-image="./images/synth-lead.png" data-description="">Non Functional Req.</option>
+                      <option value="11" data-image="./images/synth-pad.png" data-description="">High Effort & Value</option>
+                      <option value="12" data-image="./images/synth-texture.png" data-description="">At the Max</option>
+
+                  </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>2</td>
+                <td>Redirect Tool - Create, Edit And Delete Redirect</td>
+                <td>1</td>
+                <td>2</td>
+                <td>?</td>
+                <td>
+                    <select class="payments" style="width:300px;">
+                        <option selected value="0" data-image="./images/blank.png" data-description=""></option>
+                        <option value="1" data-image="./images/mallet.png" data-description="">Fast, no value</option>
+                        <option value="2" data-image="./images/bass.png">Medium Design & effort. No value</option>
+                        <option value="3" data-image="./images/keyboards.png" data-description="">Long, no value</option>
+                        <option value="4" data-image="./images/guitar.png" data-description="">Chore</option>
+                        <option value="5" data-image="./images/drum.png" data-description="">DevOps Value</option>
+
+                        <option value="6" data-image="./images/strings.png" data-description="">Design and Value 1</option>
+                        <option value="7" data-image="./images/horns.png" data-description="">Design and Value 2</option>
+                        <option value="8" data-image="./images/woodwind.png" data-description="">Design and Value 3</option>
+
+                        <option value="9" data-image="./images/synth-basic.png" data-description="">Generic</option>
+                        <option value="10" data-image="./images/synth-lead.png" data-description="">Non Functional Req.</option>
+                        <option value="11" data-image="./images/synth-pad.png" data-description="">High Effort & Value</option>
+                        <option value="12" data-image="./images/synth-texture.png" data-description="">At the Max</option>
+
+                    </select>
+                  </td>
+              </tr>
+
+              <tr>
+                  <td>3</td>
+                  <td>Standalone Admin Site - Log In Functionality</td>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>?</td>
+                  <td>
+                      <select class="payments" style="width:300px;">
+                          <option selected value="0" data-image="./images/blank.png" data-description=""></option>
+                          <option value="1" data-image="./images/mallet.png" data-description="">Fast, no value</option>
+                          <option value="2" data-image="./images/bass.png">Medium Design & effort. No value</option>
+                          <option value="3" data-image="./images/keyboards.png" data-description="">Long, no value</option>
+                          <option value="4" data-image="./images/guitar.png" data-description="">Chore</option>
+                          <option value="5" data-image="./images/drum.png" data-description="">DevOps Value</option>
+
+                          <option value="6" data-image="./images/strings.png" data-description="">Design and Value 1</option>
+                          <option value="7" data-image="./images/horns.png" data-description="">Design and Value 2</option>
+                          <option value="8" data-image="./images/woodwind.png" data-description="">Design and Value 3</option>
+
+                          <option value="9" data-image="./images/synth-basic.png" data-description="">Generic</option>
+                          <option value="10" data-image="./images/synth-lead.png" data-description="">Non Functional Req.</option>
+                          <option value="11" data-image="./images/synth-pad.png" data-description="">High Effort & Value</option>
+                          <option value="12" data-image="./images/synth-texture.png" data-description="">At the Max</option>
+
+                      </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>5</td>
+                    <td>A/B Testing - Mini-bag Open on Page Arrival</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>?</td>
+                    <td>
+                        <select class="payments" style="width:300px;">
+                            <option selected value="0" data-image="./images/blank.png" data-description=""></option>
+                            <option value="1" data-image="./images/mallet.png" data-description="">Fast, no value</option>
+                            <option value="2" data-image="./images/bass.png">Medium Design & effort. No value</option>
+                            <option value="3" data-image="./images/keyboards.png" data-description="">Long, no value</option>
+                            <option value="4" data-image="./images/guitar.png" data-description="">Chore</option>
+                            <option value="5" data-image="./images/drum.png" data-description="">DevOps Value</option>
+
+                            <option value="6" data-image="./images/strings.png" data-description="">Design and Value 1</option>
+                            <option value="7" data-image="./images/horns.png" data-description="">Design and Value 2</option>
+                            <option value="8" data-image="./images/woodwind.png" data-description="">Design and Value 3</option>
+
+                            <option value="9" data-image="./images/synth-basic.png" data-description="">Generic</option>
+                            <option value="10" data-image="./images/synth-lead.png" data-description="">Non Functional Req.</option>
+                            <option value="11" data-image="./images/synth-pad.png" data-description="">High Effort & Value</option>
+                            <option value="12" data-image="./images/synth-texture.png" data-description="">At the Max</option>
+
+                        </select>
+                      </td>
+                  </tr>
+
+                <tr>
+                    <td>4</td>
+                    <td>Checkout Error Message Copy to be Updated</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>?</td>
+                    <td>
+                        <select class="payments" style="width:300px;">
+                            <option selected value="0" data-image="./images/blank.png" data-description=""></option>
+                            <option value="1" data-image="./images/mallet.png" data-description="">Fast, no value</option>
+                            <option value="2" data-image="./images/bass.png">Medium Design & effort. No value</option>
+                            <option value="3" data-image="./images/keyboards.png" data-description="">Long, no value</option>
+                            <option value="4" data-image="./images/guitar.png" data-description="">Chore</option>
+                            <option value="5" data-image="./images/drum.png" data-description="">DevOps Value</option>
+
+                            <option value="6" data-image="./images/strings.png" data-description="">Design and Value 1</option>
+                            <option value="7" data-image="./images/horns.png" data-description="">Design and Value 2</option>
+                            <option value="8" data-image="./images/woodwind.png" data-description="">Design and Value 3</option>
+
+                            <option value="9" data-image="./images/synth-basic.png" data-description="">Generic</option>
+                            <option value="10" data-image="./images/synth-lead.png" data-description="">Non Functional Req.</option>
+                            <option value="11" data-image="./images/synth-pad.png" data-description="">High Effort & Value</option>
+                            <option value="12" data-image="./images/synth-texture.png" data-description="">At the Max</option>
+
+                        </select>
+                      </td>
+                  </tr>
+        </tbody>
+      </table>
+
+
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+  let toggleInfo = false;
+  $(document).ready(function () {
+    $("#tblBacklog").dataTable({
+      "pageLength": 50
+    });
+    $(".payments").msDropdown({ visibleRows: 4 });
+    $("#info").hide();
+  });
+
+  $("#tabs").tabs();
+
+  $(".payments").on('change', function (e) {
+    console.log(this.value);
+    $(".test").text(this.value);
+    //console.log(this.value);
+  });
+
+  $("#the-file-input").change(function () {
+    // will log a FileList object, view gifs below
+    console.log(this.files);
+  });
+
+  // render the image in our view
+  function renderImage(file) {
+
+    // generate a new FileReader object
+    var reader = new FileReader();
+
+    // inject an image with the src url
+    reader.onload = function (event) {
+      the_url = event.target.result
+      $('#some_container_div').html("<img src='" + the_url + "' />")
+    }
+
+    // when the file is read it triggers the onload event above.
+    reader.readAsDataURL(file);
+  }
+
+  // handle input changes
+  $("#the-file-input").change(function () {
+    console.log(this.files)
+
+    // grab the first image in the FileList object and pass it to the function
+    renderImage(this.files[0])
+  });
+
+  $("#btn_info").click(function () {
+    // console.log("i am toggle");
+    toggleInfo = !toggleInfo;
+    if (toggleInfo) {
+      $("#info").show();
+    } else {
+      $("#info").hide();
+    }
+  });
+
+  $(function () {
+
+  });
+
+
+</script>
+
+<!--
+<script>
+// Interoperation scripts
+  const electron = require('electron');
+  const {ipcRenderer} = electron;
+  const ul = document.querySelector('#backlogItems');
+  const pbiName = document.querySelector('#pbiName');
+
+  ipcRenderer.on('item:add', function(e, item) {
+    // console.log("adding", item);
+    // ul.classname="collection"
+    // const li = document.createElement('li')
+    // li.classname = "collection-item"
+    // const itemText = document.createTextNode(item)
+    // li.appendChild(itemText)
+    // ul.appendChild(li)
+
+
+    let id = item[0];
+    let desc = item[1];
+    let priority = item[2];
+    let storyPoints = item[3];
+    let complexity = item[4];
+
+    data = [ id, desc, priority, storyPoints, complexity, dd ];
+
+    console.log(data);
+    $("#tblBacklog").DataTable().row.add(data).rows().draw();
+
+    $(".payments").msDropdown({visibleRows:4});
+
+    // $("#tblBacklog").visible = true;
+
+    });
+
+  // clear items
+  ipcRenderer.on('item:clear', function(e, item) {
+    console.log("clearing out");
+    // set table contents to zero rows
+  })
+
+
+
+  function selectItem(e) {
+    // console.log(e.target);
+    let _name = e.target.innerText;
+    // console.log(_name);
+    // document.querySelector('#pbiName').value = _name;
+
+   var selector, elems, makeActive;
+
+    selector = '#backlogItems li';
+    elems = document.querySelectorAll(selector);
+    makeActive = function () {
+        for (var i = 0; i < elems.length; i++)
+            elems[i].classList.remove('active');
+        this.classList.add('active');
+    };
+
+    for (var i = 0; i < elems.length; i++)
+        elems[i].addEventListener('mousedown', makeActive);
+    }
+</script> -->
+</body>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+crossorigin="anonymous"></script>
+
+
+<script>
+   // Using JQuery for nostalgic reasons!
+   let dd = `
+          <select class="payments" style="width:250px;">
+              <option selected value="0" data-image="./images/blank.png" data-description=""></option>
+              <option value="1" data-image="./images/mallet.png" data-description="">Fast, no value</option>
+              <option value="2" data-image="./images/bass.png">Some Design medium effort & value</option>
+              <option value="3" data-image="./images/keyboards.png" data-description="">Long, no value</option>
+              <option value="4" data-image="./images/guitar.png" data-description="">Chore</option>
+              <option value="5" data-image="./images/drum.png" data-description="">DevOps Value</option>
+
+              <option value="6" data-image="./images/strings.png" data-description="">Design and Value 1</option>
+              <option value="7" data-image="./images/horns.png" data-description="">Design and Value 2</option>
+              <option value="8" data-image="./images/woodwind.png" data-description="">Design and Value 3</option>
+
+              <option value="9" data-image="./images/synth-basic.png" data-description="">Generic</option>
+              <option value="10" data-image="./images/synth-lead.png" data-description="">Design & Effort</option>
+              <option value="11" data-image="./images/synth-pad.png" data-description="">High Effort & Value</option>
+              <option value="12" data-image="./images/synth-texture.png" data-description="">Maxed Out</option>
+
+          </select>
+        `;
+
+
+// 	$(document).ready(function() {
+//      // Establish data table to hole backlog
+//      $("#tblBacklog").dataTable();
+
+//      // class to provide drop down shapes
+// 		 $(".payments").msDropdown({visibleRows:4});
+//  });
+
+
+ $("#tabs").tabs();
+
+ $(".payments").on('change', function(e) {
+	 console.log(this.value);
+	 $(".test").text(this.value);
+	 //console.log(this.value);
+	});
+
+	$("#the-file-input").change(function() {
+		 // will log a FileList object, view gifs below
+		 console.log(this.files);
+ });
+
+ // render the image in our view
+function renderImage(file) {
+
+ // generate a new FileReader object
+ var reader = new FileReader();
+
+ // inject an image with the src url
+ reader.onload = function(event) {
+	 the_url = event.target.result
+	 $('#some_container_div').html("<img src='" + the_url + "' />")
+ }
+
+ // when the file is read it triggers the onload event above.
+ reader.readAsDataURL(file);
+}
+
+// handle input changes
+$("#the-file-input").change(function() {
+	 console.log(this.files)
+
+	 // grab the first image in the FileList object and pass it to the function
+	 renderImage(this.files[0])
+});
+
+$("#btnInfo").click(function() {
+ toggleInfo = !toggleInfo;
+ if (toggleInfo) {
+	 $("#info").show();
+ } else {
+	 $("#info").hide();
+ }
+});
+
+$( function() {
+
+ } );
+</script>
+
+<!-- <script>
+  // Drag and drop functions
+  (function () {
+      var holder = document.getElementById('drag-file');
+
+      holder.ondragover = () => {
+          return false;
+      };
+      holder.ondragleave = () => {
+          return false;
+      };
+
+      holder.ondragend = () => {
+          return false;
+      };
+
+      holder.ondrop = (e) => {
+          e.preventDefault();
+
+          for (let f of e.dataTransfer.files) {
+              console.log('File(s) you dragged here: ', f.path)
+              ipcRenderer.send("openFile", f.path.toString())
+              // ipcRenderer.send('item:add', item)
+          }
+
+          return false;
+      };
+  })();
+</script> -->
+</html>
