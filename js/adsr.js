@@ -1,11 +1,11 @@
 /**
  * ADSR
- * 
+ *
  * Models work on the Attack, Decay, Sustain, Release synthesis model
- * 
+ *
  * We only use custmer value here - it can be related to CD3 process work to prioritse
  * Different appracjes to the work can be done to show the differences in "instruments"
- * 
+ *
  */
 
 var _width = 400;//window.screen.width;
@@ -103,14 +103,14 @@ var y_off = 60;
 
 var cust_x; // x value when the customer value box is being moved
 
-var freestyle = 'Freestyle'; 
+var freestyle = 'Freestyle';
 var drum = "1";//'Drum - short power burst';
 var horns = "2";// 'Horns - Fast build, slow release';
 var strings = "3";//'Strings - Slight noise then resonance';
-var wind =  "4";//'Wind - Up front work and small effort'; 
-var bass = "5";//'Bass -  Slow and steady'; 
+var wind =  "4";//'Wind - Up front work and small effort';
+var bass = "5";//'Bass -  Slow and steady';
 var keys = "6";//'Keys - Like a tuned drum';
-var guitar = "7";//'Guitar - Choppy effort and little value'; 
+var guitar = "7";//'Guitar - Choppy effort and little value';
 var synthBasic = "8";//'Synth Basic - Default setting - can be replaced';
 var synthPad = "9";//'Synth Pad - Scan and design take as long as effort, high value';
 var synthLead = "10";//'Synth Lead - Punchy application producing high value';
@@ -155,15 +155,14 @@ var SelfStep = 1;
 var timeCriticality = '';
 
 function preload() {
-   
+
 }
 
 function setup() {
 
-    bg=loadImage('./images/phobos-grooves.jpg');
     var myCan = createCanvas(650,350);
-    myCan.parent("sadv");    
-    
+    myCan.parent("sadv");
+
     box_env = new Box();
     box_design = new Box();
     box_deliver = new Box();
@@ -176,7 +175,7 @@ function setup() {
     y5 = _height/2;
 
     box_cust = new Box();
-   
+
     box_cust.tooltip = 'Customer Value';
 
     x7strat=400;
@@ -200,26 +199,26 @@ function setup() {
    box_ops = new Box(x5 + 10, 1045, x5+20, 1084); // drive this off the screen to let customer box have space
    box_team = new Box(x5 + 10, 185, x5+20, 224);
    box_person = new Box(x5 + 10, 225, x5+20, 264);
-   
+
    slct_workProfile = select(".payments");
 
 //    setValues("audience");
 
-    select("#duration").value("10");
+    // select("#duration").value("10");
 
-    timeCriticality = select("#time-criticality");
-    timeCriticality.changed(timeCriticalityCalc);
+    // timeCriticality = select("#time-criticality");
+    // timeCriticality.changed(timeCriticalityCalc);
 }
 
 function draw() {
 
     //background(bg);
     background(255);
-    
+
     translate(10, 60);
 
     setPoints();
-    
+
     // Red Scan Line
     stroke(255,0,0);
     line(x1, y1, x2, y2);
@@ -245,7 +244,7 @@ function draw() {
     stroke(220, 220, 220);
     var _design = '' + floor( map( x3 - x2, 0, 200, 0, 100)) ;
     text('Design ' + _design.substring(0,3), (x3 - (x3 - x2 )/2 ) + 10, (y3 - (y3 -y2)/2));
-    
+
     // Green Effort/Sustain Line
     stroke(0, 255, 0);
     fill(0,255,0);
@@ -259,7 +258,7 @@ function draw() {
     stroke(220, 220, 220);
     var _delivery = '' + floor(100 - map(_height - y4, 0, _height, 100, 0));
     text('Delivery ' + _delivery, x3 , (y3 + 30));
-   
+
     // TODO - Refactor to tidy the drawing of triangles
     fill(255, 153, 0);
     stroke(255, 153, 0);
@@ -276,7 +275,7 @@ function draw() {
     strokeWeight(1);
     fill(130,130,130);
     stroke(130,130,130);
-    
+
     text('Time & Effort', 10, -30);
 
     text('Value', x5 + 60, -30);
@@ -304,21 +303,21 @@ function draw() {
     text(" 20",  x5 + 210, 165);
     text("   0",  x5 + 210, 205);
 
-    wsjf();
+    // wsjf();
 
     // customer value line goes from position on x5 vertical to relative(0,0)
     //line(x5, 22, this.box_cust.box_x1-10, 22);
     // var xy = constrain (box_cust.box_y1, _height - 200, _height);
 
-    triangle (box_cust.box_x1-10, box_cust.box_y1-55, box_cust.box_x1-5, 
+    triangle (box_cust.box_x1-10, box_cust.box_y1-55, box_cust.box_x1-5,
     box_cust.box_y1-60, box_cust.box_x1, box_cust.box_y1-55);
 
-    triangle (this.box_cust.box_x1-10, this.box_cust.box_y1-45, this.box_cust.box_x1-5, 
+    triangle (this.box_cust.box_x1-10, this.box_cust.box_y1-45, this.box_cust.box_x1-5,
     this.box_cust.box_y1-40, this.box_cust.box_x1, this.box_cust.box_y1-45);
-    
+
     rect(this.box_cust.box_x1 - 8, this.box_cust.box_y1-55, 6, 10);
-    
-    
+
+
     if (last_instrument_selected != slct_workProfile.value() )
     {
         var _workProfile = slct_workProfile.value();
@@ -335,9 +334,9 @@ function draw() {
                 y3 = 0;
 
                 x4 = 0;
-                y4 = 0; 
+                y4 = 0;
                 break;
-            
+
             case horns:
                 x1 = 0;
                 y1 = 0;
@@ -349,7 +348,7 @@ function draw() {
                 y3 = 0;
 
                 x4 = 50;
-                y4 = 50; 
+                y4 = 50;
                 break;
 
             case strings:
@@ -363,7 +362,7 @@ function draw() {
                 y3 = 0;
 
                 x4 = 150;
-                y4 = 50; 
+                y4 = 50;
                 break;
 
             case wind:
@@ -377,7 +376,7 @@ function draw() {
                 y3 = 0;
 
                 x4 = 250;
-                y4 = _height - 30; 
+                y4 = _height - 30;
                 break;
 
             case bass:
@@ -391,7 +390,7 @@ function draw() {
                 y3 = 0;
 
                 x4 = 250;
-                y4 = _height - 30; 
+                y4 = _height - 30;
                 break;
 
             case keys:
@@ -405,7 +404,7 @@ function draw() {
                 y3 = 0;
 
                 x4 = 150;
-                y4 = _height - 130; 
+                y4 = _height - 130;
                 break;
 
             case guitar:
@@ -419,7 +418,7 @@ function draw() {
                 y3 = 0;
 
                 x4 = 150;
-                y4 = _height - 70; 
+                y4 = _height - 70;
                 break;
 
             case synthBasic:
@@ -433,9 +432,9 @@ function draw() {
                 y3 = 0;
 
                 x4 = 300;
-                y4 = 100; 
+                y4 = 100;
                 break;
-            
+
             case synthPad:
                 x1 = 0;
                 y1 = 0;
@@ -447,7 +446,7 @@ function draw() {
                 y3 = 0;
 
                 x4 = 300;
-                y4 = 20; 
+                y4 = 20;
                 break;
 
             case synthLead:
@@ -461,7 +460,7 @@ function draw() {
                 y3 = 0;
 
                 x4 = 300;
-                y4 = _height - 70; 
+                y4 = _height - 70;
                 break;
 
             case synthTexture:
@@ -475,18 +474,18 @@ function draw() {
                 y3 = 0;
 
                 x4 = 300;
-                y4 = 0; 
+                y4 = 0;
                 break;
-        
+
         }
-    
+
         last_instrument_selected = slct_workProfile.value();
         // Need ONE TIME profile setting - changedevent ? - quickfix applied
         workProfile = freestyle;
     }
-    
-    timeCriticalityCalc();
-    
+
+    // timeCriticalityCalc();
+
     //showCogLead();
 
 } // draw
@@ -498,7 +497,7 @@ function draw() {
  *  - change to dragging the points on the lines
  */
 function setPoints() {
-    
+
     x1 = 0;
     y1 = _height;
 
@@ -510,7 +509,7 @@ function setPoints() {
         }
     }
     // Sometimes a fast drag to the left will make the end point negative.
-    if (x2 < 0) 
+    if (x2 < 0)
     {
         x2 = 0;
     }
@@ -532,7 +531,7 @@ function setPoints() {
         x2 = _width/4;
     }
 
-    // The design start cannot be before the end of the scan (at the moment) 
+    // The design start cannot be before the end of the scan (at the moment)
     if (x3 < x2) {
         x3 = x2;
     }
@@ -541,9 +540,9 @@ function setPoints() {
     }
 
     x4 = x3 + _width/4;
-   
+
     y3 = y4;
-    
+
     x5 =  _width*(7/8);
     // y5 = _height/2;
     x6 = x5 + 25;
@@ -565,19 +564,19 @@ function setPoints() {
     box_deliver.box_x2 = (x3 + _width/8) + 10 + x_off;
     box_deliver.box_y1 = y3 - 15 + y_off;
     box_deliver.box_y2 = y3 + 15 + y_off;
-    
-    wsjf();
+
+    // wsjf();
 }
 
 
 /**
  * Mouse functions
- * 
+ *
  * TODO - Make them object specific.
  */
 function mousePressed() {
     console.log("Pressed", mouseX, mouseY);
-    
+
     if (this.box_env.isInside(mouseX, mouseY)) {
         box_env_on = true;
         //console.log('In Env');
@@ -595,7 +594,7 @@ function mousePressed() {
         this.box_cust_on = true;
         // console.log('In Customer ' + this.box_cust_on);
     }
-   
+
 }
 
 function mouseReleased() {
@@ -604,18 +603,18 @@ function mouseReleased() {
     box_deliver_on = false;
 
     box_cust_on = false;
-    
-    wsjf();
+
+    // wsjf();
 }
 
 function mouseDragged() {
-   
+
     if (box_env_on) {
         //console.log('Drag', box_env_on)
         if ( (x2 <= _width/4) && (x2 >= 0) ) {
             x2 = mouseX;
             if (mouseX > 0) {
-                
+
             }
         }
     }
@@ -635,13 +634,13 @@ function mouseDragged() {
             //console.log(y4, mouseY);
         }
     }
-    
+
     // For Single Customer value the movement is vertical
     else if (box_cust_on) {
          if ( (mouseY >= y_off  ) && (mouseY <= _height + y_off ) ) {
             this.box_cust.updateY(mouseY - 10);
             y5 = mouseY - 50;
-        }     
+        }
     }
     // if (this.box_cust.box_y1 <= y_off - 20) {
     //     this.box_cust.updateY(y_off)
@@ -691,10 +690,10 @@ function toggleCalcs() {
 
 /**
  * Cognitive Lead Time shows if scan and design can be done in time box
- * 
+ *
  * the agile way of cutting tasks into smaller periods to deliver misses the value perspectives
- * 
- * Sprints are fixed duration 
+ *
+ * Sprints are fixed duration
  * Releases may vary
  * Ops are quarter reporting periods
  * Strategy can be malleable - long term view to steer the ship
@@ -723,11 +722,11 @@ function isNumber(n) {
 
 /**
  * Weighted Shortest Job First
- * 
+ *
  * WSJF = (Customer Value + RR | OE + Time Criticality) / Job Size
  * or
  * MVJF = (Summed values) / Scan + Design + Effort * duration
- * 
+ *
  */
 function wsjf() {
 
@@ -741,7 +740,7 @@ function wsjf() {
 
     if (valid) {
 
-   
+
         var scan_dur = x2 - x1;
         var design_dur = x3 - x2;
         var denom = dur - ( ( scan_dur + design_dur ) / 200);
@@ -755,7 +754,7 @@ function wsjf() {
         var effort = floor(map(y4, _height, (_height - 200), 0, 100));
 
         //var time_effort = leadTime;
- 
+
         cust_val = floor(map(y5, _height,  (_height - 200), 0, 100));
         // strat_val = floor(map(this.box_strat.box_x1, x5 + 10, x5 + 200, 0, 100));
         // ops_val = floor(map(this.box_ops.box_x1, x5 + 10, x5 + 200, 0, 100));
@@ -763,7 +762,7 @@ function wsjf() {
         // person_val = floor(map(this.box_person.box_x1, x5 + 10, x5 + 200, 0, 100));
 
         // advise_value.innerHTML = 'Value<br>Customer: ' +  cust_val  +'<br>Strategic: ' + strat_val + '<br>Operations: ' + ops_val + '<br>Team: ' + team_val + '<br>Personal: ' +person_val;
-        
+
         let crit = timeCriticality.value();
         switch (crit) {
             case "2":
@@ -777,22 +776,22 @@ function wsjf() {
                 wsjf_val = (cust_val / (floor(effort * dur) + (2*dur)));
                 break;
         }
-       
+
         var _txt_wsjf = '' + wsjf_val;
         _txt_wsjf = "WSJF: " + _txt_wsjf.substring(0,6);
         // advise_wsjf.innerHTML = "WSJF: " + _txt_wsjf.substring(0,6);
         stroke(52);
         fill(52);
         text(_txt_wsjf , 20, height - 80);
-    
+
     }
 }
 
 // Switch the time labels depending on critical selection
 function timeCriticalityCalc() {
-    
+
     let crit = timeCriticality.value();
-    
+
     if (x4 === 0) {
         x4 = 0.01;
     }
@@ -826,5 +825,5 @@ function timeCriticalityCalc() {
             text("Lead", x4/2 - 10, height - 102);
             break;
     }
-    
+
 }

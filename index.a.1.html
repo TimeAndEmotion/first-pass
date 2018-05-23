@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Work Envelope</title>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
+
+  <!-- normal script imports etc  -->
+  <script src="scripts/jquery.js"></script>
+  <script src="http://evanplaice.github.io/jquery-csv/src/jquery.csv.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+  <script src="./libraries/jquery.dd.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/plug-ins/1.10.15/sorting/custom-data-source/dom-text.js"></script>
+
+  <script language="javascript" src="libraries/quicksettings.js"></script>
+
+  <script language="javascript" type="text/javascript" src="libraries/p5.js"></script>
+  <!-- uncomment lines below to include extra p5 libraries -->
+  <script language="javascript" src="libraries/p5.dom.js"></script>
+  <script language="javascript" src="libraries/p5.sound.js"></script>
+  <script language="javascript" src="libraries/quicksettings.js"></script>
+
+  <script language="javascript" type="text/javascript" src="./js/box.js"></script>
+
+  <script language="javascript" type="text/javascript" src="./js/valueButton.js"></script>
+  <script language="javascript" type="text/javascript" src="./js/adsr.js"></script>
+
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" />
+  <link rel="stylesheet" type="text/css" href="css/msdropdown/dd.css" />
+  <link rel="stylesheet" href="css/jquery-ui.min.css">
+
+  <link rel="icon" href="tefav.ico" />
+  <!-- Insert this line after script imports -->
+  <script>if (window.module) module = window.module;</script>
+
+  <style>
+    li.active {
+      color: red;
+    }
+    .drag-file1 {
+      background-color: rgb(87, 87, 90);
+      border-style:dotted;
+      color:white;
+      text-align: center;
+      width:180px;
+      height:40px;
+    }
+  </style>
+
+
+</head>
+
+
+<body>
+
+
+  <div id="container" class="container">
+
+    <h1>Work Envelope Shaper</h1>
+
+    <button id="btn_info" class="btn btn-info">info</button>
+    <div id="info">
+      <h2>Overview and test instructions</h2>
+      <h3>Overview</h3>
+      <P></P>
+      Estmation is to delivery as foreplay is to sex.
+      <P></P>
+      In software teams personal estimation is done by measuring the perceived complexity of a task. It is useful to compare different
+      opinions and do knowledge sharing. The approach is applicable to every part of work. It helps if you hang your ego
+      on the hook by the door!
+      <p></p>
+      Complexity can be simplified by splitting tasks into design and effort to deliver. Sometimes design is reverse engineering.
+      <p></p>
+      This simple realisation allows the task to be profiled as design and delivery phases. They are preceeded by a scan phase
+      and succeeded by a value phase. A typical profile looks like this.
+      <img src="./images/sddv_adsr.png" class="img img-responsive" />
+      <p></p>
+      At the slight risk of sounding heretical to the accepted wisdom of team players I ask you to consider personal value. Subsequent
+      versions will incorporate another four value dimensions: Customer, Strategic, Operational and Team. These values should
+      be supplied by the people allocating the work. For now put yourself first!
+      <p></p>
+      The way I start estimating is by doing a gut feel pass to associate profiles with the task. It is very quick. A day or two
+      later I return and pay attention to tasks that need more consideration.
+
+      <h3>Aim - Get feedback on ease of use for first pass estimate</h3>
+      <P></P>
+      In the table below are tasks that can be used to test the concept.
+      <p></p>
+      Thinking Fast and Slow is a popular way of considering estimation. Here we focus on thinking fast. This would be done prior
+      to starting any work say by perhaps a week.
+      <p></p>
+      <a href="mailto:zak@timeandemotion.com">Please email suggestions for improvements</a>
+      <p></p>
+      <h3>Instructions</h3>
+      <ol>
+        <li>Load a backlog .csv containing PBIs with columns: ID, Description, Priority and Story Points</li>
+        <li>Do a fast pass to put a profile against each task</li>
+        <li>Come back the next day, after your brain has done slower, rational thinking and estimate complexity and duration</li>
+      </ol>
+      <p></p>
+      <button id="btn_close" class="btn btn-info">Close</button>
+    </div>
+    <P></P>
+
+    <P></P>
+    <div class="row">
+      <div class="col col-lg-3">
+        <h4>12 basic profiles</h4>
+      </div>
+      <div class="col col-lg-1">
+        <h4>Show/Hide</h4>
+      </div>
+      <div class="col col-lg-1">
+        <input id="show-hide" type="checkbox" checked class="form-control" />
+      </div>
+
+      <div class="col col-lg-3">
+          <div id="inputs" class="clearfix">
+              <input type="file" id="files" name="files[]" multiple />
+            </div>
+      </div>
+
+      <div class="col col-lg-1">
+        <button id="btnExport" class="btn btn-primary">Export</button>
+      </div>
+
+      <div class="col col-lg-1">
+        <img id="imgBacklog" src="./images/backlog.png" alt="Session" />
+        <img id="imgTimeline" name="imgTimeline" src="./images/timeline.png" alt="Arrangement" />
+      </div>
+
+      <!-- <div class="col col-lg-1">
+        <img src="./images/timeline.png" alt="Arrangement" />
+      </div> -->
+
+    </div>
+    <P></P>
+    <hr>
+    <div id="legend">
+        <hr style="border-top: 3px double #8c8b8b">
+
+        <div class="row">
+        <div class="col col-lg-3">
+          <img src="./images/mallet.png">Fast, no value</div>
+        <div class="col col-lg-3">
+          <img src="./images/bass.png">Medium Design & effort. No value</div>
+        <div class="col col-lg-3">
+          <img src="./images/keyboards.png">Long, no value</div>
+        <div class="col col-lg-3">
+          <img src="./images/guitar.png">Chore</div>
+      </div>
+      <hr style="border-top: 3px double #8c8b8b">
+        <div class="row">
+        <div class="col col-lg-3">
+          <img src="./images/drum.png">Non Functional Requirement</div>
+        <div class="col col-lg-3">
+          <img src="./images/strings.png">Design and Value #1</div>
+        <div class="col col-lg-3">
+          <img src="./images/horns.png">Design and Value #2</div>
+        <div class="col col-lg-3">
+          <img src="./images/woodwind.png">Design and Value #2</div>
+      </div>
+      <hr style="border-top: 3px double #8c8b8b">
+        <div class="row">
+        <div class="col col-lg-3">
+          <img src="./images/synth-basic.png">Generic</div>
+        <div class="col col-lg-3">
+          <img src="./images/synth-lead.png">Spike</div>
+        <div class="col col-lg-3">
+          <img src="./images/synth-pad.png">High Effort & Value</div>
+        <div class="col col-lg-3">
+          <img src="./images/synth-texture.png">At the Max</div>
+      </div>
+      <hr style="border-top: 3px double #8c8b8b">
+    </div>
+    <p></p>
+
+    <hr />
+    <p></p>
+    <div id="backlog" class="row">
+
+
+      <table id="tblBacklog" class="table">
+        <thead>
+          <th>Id</th>
+          <th>Description</th>
+          <th>Priority</th>
+          <th class="text-right">Story Points</th>
+          <th>Work Profile</th>
+          <th class="text-right">Complexity</th>
+          <th class="text-right">Duration</th>
+
+        </thead>
+        <tbody>
+
+          <tr>
+            <td>1</td>
+            <td>Remove Ingredients Link from PDX on Procudtion branch</td>
+            <td class="text-center">M</td>
+            <td class="text-right">3</td>
+            <td>
+              <select class="payments" style="width:300px;">
+                <option selected value="0" data-image="./images/blank.png" data-description=""></option>
+                <option value="1" data-image="./images/mallet.png" data-description="">Fast, no value</option>
+                <option value="2" data-image="./images/bass.png">Medium Design & effort. No value</option>
+                <option value="3" data-image="./images/keyboards.png" data-description="">Long, no value</option>
+                <option value="4" data-image="./images/guitar.png" data-description="">Chore</option>
+
+                <option value="5" data-image="./images/drum.png" data-description="">Non Functional Requirement</option>
+                <option value="6" data-image="./images/strings.png" data-description="">Design and Value #1</option>
+                <option value="7" data-image="./images/horns.png" data-description="">Design and Value #2</option>
+                <option value="8" data-image="./images/woodwind.png" data-description="">Design and Value #3</option>
+
+                <option value="9" data-image="./images/synth-basic.png" data-description="">Generic</option>
+                <option value="10" data-image="./images/synth-lead.png" data-description="">Spike</option>
+                <option value="11" data-image="./images/synth-pad.png" data-description="">High Effort & Value</option>
+                <option value="12" data-image="./images/synth-texture.png" data-description="">At the Max</option>
+
+              </select>
+            </td>
+            <td>
+              <input type="text" width="4" name="cplx_1" value=0 class="form-control text-right"></input>
+            </td>
+            <td>
+              <input type="text" width="4" name="cplx_1" value=0 class="form-control text-right col-lg-1"></input>
+            </td>
+          </tr>
+
+          <tr>
+            <td>2</td>
+            <td>Redirect Tool - Create, Edit And Delete Redirect</td>
+            <td class="text-center">S</td>
+            <td class="text-right">2</td>
+            <td>
+              <select class="payments" style="width:300px;">
+                <option selected value="0" data-image="./images/blank.png" data-description=""></option>
+                <option value="1" data-image="./images/mallet.png" data-description="">Fast, no value</option>
+                <option value="2" data-image="./images/bass.png">Medium Design & effort. No value</option>
+                <option value="3" data-image="./images/keyboards.png" data-description="">Long, no value</option>
+                <option value="4" data-image="./images/guitar.png" data-description="">Chore</option>
+
+                <option value="5" data-image="./images/drum.png" data-description="">Non Functional Requirement</option>
+                <option value="6" data-image="./images/strings.png" data-description="">Design and Value #1</option>
+                <option value="7" data-image="./images/horns.png" data-description="">Design and Value #2</option>
+                <option value="8" data-image="./images/woodwind.png" data-description="">Design and Value #3</option>
+
+                <option value="9" data-image="./images/synth-basic.png" data-description="">Generic</option>
+                <option value="10" data-image="./images/synth-lead.png" data-description="">Spike</option>
+                <option value="11" data-image="./images/synth-pad.png" data-description="">High Effort & Value</option>
+                <option value="12" data-image="./images/synth-texture.png" data-description="">At the Max</option>
+
+              </select>
+            </td>
+            <td>
+              <input type="text" width="4" name="cplx_2" value=0 class="form-control text-right"></input>
+            </td>
+            <td>
+              <input type="text" width="4" name="cplx_2" value=0 class="form-control text-right"></input>
+            </td>
+          </tr>
+
+          <tr>
+            <td>3</td>
+            <td>Standalone Admin Site - Log In Functionality</td>
+            <td class="text-center">C</td>
+            <td class="text-right">3</td>
+            <td>
+              <select class="payments" style="width:300px;">
+                <option selected value="0" data-image="./images/blank.png" data-description=""></option>
+                <option value="1" data-image="./images/mallet.png" data-description="">Fast, no value</option>
+                <option value="2" data-image="./images/bass.png">Medium Design & effort. No value</option>
+                <option value="3" data-image="./images/keyboards.png" data-description="">Long, no value</option>
+                <option value="4" data-image="./images/guitar.png" data-description="">Chore</option>
+
+                <option value="5" data-image="./images/drum.png" data-description="">Non Functional Requirement</option>
+                <option value="6" data-image="./images/strings.png" data-description="">Design and Value #1</option>
+                <option value="7" data-image="./images/horns.png" data-description="">Design and Value #2</option>
+                <option value="8" data-image="./images/woodwind.png" data-description="">Design and Value #3</option>
+
+                <option value="9" data-image="./images/synth-basic.png" data-description="">Generic</option>
+                <option value="10" data-image="./images/synth-lead.png" data-description="">Spike</option>
+                <option value="11" data-image="./images/synth-pad.png" data-description="">High Effort & Value</option>
+                <option value="12" data-image="./images/synth-texture.png" data-description="">At the Max</option>
+
+              </select>
+            </td>
+            <td>
+              <input type="text" width="4" name="cplx_3" value=0 class="form-control text-right"></input>
+            </td>
+            <td>
+              <input type="text" width="4" name="cplx_3" value=0 class="form-control text-right"></input>
+            </td>
+          </tr>
+
+
+
+          <tr>
+            <td>4</td>
+            <td>Checkout Error Message Copy to be Updated</td>
+            <td class="text-center">W</td>
+            <td class="text-right">3</td>
+            <td>
+              <select class="payments" style="width:300px;">
+                <option selected value="0" data-image="./images/blank.png" data-description=""></option>
+                <option value="1" data-image="./images/mallet.png" data-description="">Fast, no value</option>
+                <option value="2" data-image="./images/bass.png">Medium Design & effort. No value</option>
+                <option value="3" data-image="./images/keyboards.png" data-description="">Long, no value</option>
+                <option value="4" data-image="./images/guitar.png" data-description="">Chore</option>
+
+                <option value="5" data-image="./images/drum.png" data-description="">Non Functional Requirement</option>
+                <option value="6" data-image="./images/strings.png" data-description="">Design and Value #1</option>
+                <option value="7" data-image="./images/horns.png" data-description="">Design and Value #2</option>
+                <option value="8" data-image="./images/woodwind.png" data-description="">Design and Value #3</option>
+
+                <option value="9" data-image="./images/synth-basic.png" data-description="">Generic</option>
+                <option value="10" data-image="./images/synth-lead.png" data-description="">Spike</option>
+                <option value="11" data-image="./images/synth-pad.png" data-description="">High Effort & Value</option>
+                <option value="12" data-image="./images/synth-texture.png" data-description="">At the Max</option>
+
+              </select>
+            </td>
+            <td>
+              <input type="text" name="cplx_4" value=0 class="form-control text-right"></input>
+            </td>
+            <td>
+              <input type="text" name="cplx_4" value=0 class="form-control text-right"></input>
+            </td>
+
+          </tr>
+
+        </tbody>
+      </table>
+      <P></P>
+      <a href="mailto:zak@timeandemotion.com">Please email suggestions for improvements</a>
+    </div>
+    <div class="row">
+    <div id="arrangement" class="col col-lg-12" visible="false">
+      <img src="./images/arrangement-top.png" alt="Arrangement" class="img img-responsive" />
+
+      <div id="sadv" class="col col-lg-8 col-lg-offset-3" visible="false" style="border-style:double;border-color:black;">
+
+      </div>
+    </div>
+  </div>
+  </div>
+
+
+  <script>
+    let toggleInfo = false;
+
+    /* Create an array with the values of all the input boxes in a column */
+    $.fn.dataTable.ext.order['dom-text'] = function (settings, col) {
+      return this.api().column(col, { order: 'index' }).nodes().map(function (td, i) {
+        return $('input', td).val();
+      });
+    }
+
+    /* Create an array with the values of all the input boxes in a column, parsed as numbers */
+    $.fn.dataTable.ext.order['dom-text-numeric'] = function (settings, col) {
+      return this.api().column(col, { order: 'index' }).nodes().map(function (td, i) {
+        return $('input', td).val() * 1;
+      });
+    }
+
+    /* Create an array with the values of all the select options in a column */
+    $.fn.dataTable.ext.order['dom-select'] = function (settings, col) {
+      return this.api().column(col, { order: 'index' }).nodes().map(function (td, i) {
+        return $('select', td).val();
+      });
+    }
+
+    /* Create an array with the values of all the checkboxes in a column */
+    $.fn.dataTable.ext.order['dom-checkbox'] = function (settings, col) {
+      return this.api().column(col, { order: 'index' }).nodes().map(function (td, i) {
+        return $('input', td).prop('checked') ? '1' : '0';
+      });
+    }
+
+    $(document).ready(function () {
+      // check documentupload is available
+      if(isAPIAvailable()) {
+        $('#files').bind('change', handleFileSelect);
+      }
+
+      // set up table to hold data
+      $("#tblBacklog").dataTable({
+        "pageLength": 50,
+        "columns": [
+          null,
+          null,
+          { "orderDataType": "dom-text-numeric" },
+          { "orderDataType": "dom-text-numeric" },
+          { "orderDataType": "dom-select" },
+          { "orderDataType": "dom-text-numeric" },
+          { "orderDataType": "dom-text-numeric" }
+        ],
+        'columnDefs': [
+          {
+            // "targets": [2,3,4],
+            // "orderDataType": "dom-text-numeric",
+            // 'targets': [1, 2, 3],
+            'render': function (data, type, row, meta) {
+              if (type === 'display') {
+                var api = new $.fn.dataTable.Api(meta.settings);
+
+                var $el = $('input, select, textarea', api.cell({ row: meta.row, column: meta.col }).node());
+
+                var $html = $(data).wrap('<div/>').parent();
+
+                if ($el.prop('tagName') === 'INPUT') {
+                  $('input', $html).attr('value', $el.val());
+                  if ($el.prop('checked')) {
+                    $('input', $html).attr('checked', 'checked');
+                  }
+                } else if ($el.prop('tagName') === 'TEXTAREA') {
+                  $('textarea', $html).html($el.val());
+
+                } else if ($el.prop('tagName') === 'SELECT') {
+                  $('option:selected', $html).removeAttr('selected');
+                  $('option', $html).filter(function () {
+                    return ($(this).attr('value') === $el.val());
+                  }).attr('selected', 'selected');
+                }
+
+                data = $html.html();
+              }
+              return data;
+            }
+          }
+        ],
+      });
+      $(".payments").msDropdown({ visibleRows: 13 });
+      $("#info").hide();
+      $("#arrangement").hide();
+      $("#sadv").hide();
+    });
+
+    function isAPIAvailable() {
+      // Check for the various File API support.
+      if (window.File && window.FileReader && window.FileList && window.Blob) {
+        // Great success! All the File APIs are supported.
+        return true;
+      } else {
+        // source: File API availability - http://caniuse.com/#feat=fileapi
+        // source: <output> availability - http://html5doctor.com/the-output-element/
+        document.writeln('The HTML5 APIs used in this form are only available in the following browsers:<br />');
+        // 6.0 File API & 13.0 <output>
+        document.writeln(' - Google Chrome: 13.0 or later<br />');
+        // 3.6 File API & 6.0 <output>
+        document.writeln(' - Mozilla Firefox: 6.0 or later<br />');
+        // 10.0 File API & 10.0 <output>
+        document.writeln(' - Internet Explorer: Not supported (partial support expected in 10.0)<br />');
+        // ? File API & 5.1 <output>
+        document.writeln(' - Safari: Not supported<br />');
+        // ? File API & 9.2 <output>
+        document.writeln(' - Opera: Not supported');
+        return false;
+      }
+    }
+
+    function handleFileSelect(evt) {
+      var files = evt.target.files; // FileList object
+      var file = files[0];
+
+      // read the file metadata
+      var output = ''
+          output += '<span style="font-weight:bold;">' + escape(file.name) + '</span><br />\n';
+          output += ' - FileType: ' + (file.type || 'n/a') + '<br />\n';
+          output += ' - FileSize: ' + file.size + ' bytes<br />\n';
+          output += ' - LastModified: ' + (file.lastModifiedDate ? file.lastModifiedDate.toLocaleDateString() : 'n/a') + '<br />\n';
+
+      // clear current contents
+      $("#tblBacklog").DataTable().clear();
+
+      // read the file contents
+      printTable(file);
+
+      // post the results
+      // $('#test').append(output);
+    }
+
+    let dd = `
+          <select class="payments" style="width:300px;">
+              <option selected value="0" data-image="./images/blank.png" data-description=""></option>
+              <option value="1" data-image="./images/mallet.png" data-description="">Fast, no value</option>
+              <option value="2" data-image="./images/bass.png">Some Design medium effort & value</option>
+              <option value="3" data-image="./images/keyboards.png" data-description="">Long, no value</option>
+              <option value="4" data-image="./images/guitar.png" data-description="">Chore</option>
+              <option value="5" data-image="./images/drum.png" data-description="">DevOps Value</option>
+
+              <option value="6" data-image="./images/strings.png" data-description="">Design and Value 1</option>
+              <option value="7" data-image="./images/horns.png" data-description="">Design and Value 2</option>
+              <option value="8" data-image="./images/woodwind.png" data-description="">Design and Value 3</option>
+
+              <option value="9" data-image="./images/synth-basic.png" data-description="">Generic</option>
+              <option value="10" data-image="./images/synth-lead.png" data-description="">Design & Effort</option>
+              <option value="11" data-image="./images/synth-pad.png" data-description="">High Effort & Value</option>
+              <option value="12" data-image="./images/synth-texture.png" data-description="">Maxed Out</option>
+
+          </select>
+        `;
+
+    function addRow(pbi) {
+
+      let id = pbi[0];
+      let desc = pbi[1];
+      let priority = pbi[2];
+      let storyPoints = pbi[3];
+      let complexity = '0';
+      let duration = '0';
+
+      // TODO - find out why the sort and order on priority and points is not working
+      data = [ id,
+                desc,
+                '<input name = "priority_' + id + '"  value=' + priority + ' class="form-control text-center" disabled="false"></input>',
+                '<input name = "points_' + id + '" value=' + storyPoints + ' class="form-control text-right"  disabled="false"></input>',
+                dd,
+                '<input name="cmplxty_' + id + '" value = 0 class="form-control text-right"></input>',
+                '<input name="duration_' + id + '" value = 0 class="form-control text-right"></input>'];
+
+      console.log(data);
+      table = $("#tblBacklog").DataTable().row.add(data).rows().draw();
+
+      $(".payments").msDropdown({visibleRows:13});
+
+    };
+
+    function printTable(file) {
+      var reader = new FileReader();
+      reader.readAsText(file);
+      reader.onload = function(event){
+        var csv = event.target.result;
+        var data = $.csv.toArrays(csv);
+        var html = '';
+        for(var row in data) {
+          html += '<tr>\r\n';
+          let pbi = [4];
+
+          for(var item in data[row]) {
+            console.log(data[row][item])
+            html += '<td>' + data[row][item] + '</td>\r\n';
+
+            pbi[0] = data[row][0];  // id
+            pbi[1] = data[row][1];  // desc
+            pbi[2] = data[row][2];  // priority
+            pbi[3] = data[row][3];  // story points
+          }
+
+          html += '</tr>\r\n';
+          addRow(pbi);
+        }
+        // $('#test').html(html);
+      };
+      reader.onerror = function(){ alert('Unable to read ' + file.fileName); };
+    }
+
+    $('#tblBacklog tbody').on('change', 'td', function (e) {
+      var data = $('#tblBacklog').DataTable().$('input, select').serialize();
+      console.log("Data from change : ", data)
+      //$("#tblBacklog").DataTable().draw();
+    });
+
+    $('#tblBacklog tbody').on('blur', 'td', function (e) {
+      // var data = $('#tblBacklog').DataTable().$('input, select').serialize();
+      // console.log("Data from change : ", data)
+      // $("#tblBacklog").DataTable().draw();
+    });
+
+    $("#tabs").tabs();
+
+    $(".payments").on('change', function (e) {
+      console.log(this.value);
+      $(".test").text(this.value);
+      //console.log(this.value);
+    });
+
+    $("#the-file-input").change(function () {
+      // will log a FileList object, view gifs below
+      console.log(this.files);
+    });
+
+    // render the image in our view
+    function renderImage(file) {
+
+      // generate a new FileReader object
+      var reader = new FileReader();
+
+      // inject an image with the src url
+      reader.onload = function (event) {
+        the_url = event.target.result
+        $('#some_container_div').html("<img src='" + the_url + "' />")
+      }
+
+      // when the file is read it triggers the onload event above.
+      reader.readAsDataURL(file);
+    }
+
+    // handle input changes
+    $("#the-file-input").change(function () {
+      console.log(this.files)
+
+      // grab the first image in the FileList object and pass it to the function
+      renderImage(this.files[0])
+    });
+
+    $("#btn_info").click(function () {
+      // console.log("i am toggle");
+      toggleInfo = !toggleInfo;
+      if (toggleInfo) {
+        $("#info").show();
+      } else {
+        $("#info").hide();
+      }
+    });
+
+    $(function () {
+
+    });
+
+
+  </script>
+
+
+</body>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+  crossorigin="anonymous"></script>
+
+
+<script>
+  // Using JQuery for nostalgic reasons!
+
+  $("#tabs").tabs();
+
+
+  $("#the-file-input").change(function () {
+    // will log a FileList object, view gifs below
+    console.log(this.files);
+  });
+
+
+
+  $("#btnInfo").click(function () {
+    toggleInfo = !toggleInfo;
+    if (toggleInfo) {
+      $("#info").show();
+    } else {
+      $("#info").hide();
+    }
+  });
+
+  $("#btn_close").click(function () {
+    toggleInfo = !toggleInfo;
+    if (toggleInfo) {
+      $("#info").show();
+    } else {
+      $("#info").hide();
+    }
+  });
+
+
+  $(function () {
+
+  });
+
+  let legendShow = true;
+  $("#show-hide").on("click", function () {
+    legendShow = !legendShow;
+    if (legendShow) {
+      $("#legend").show();
+    } else {
+      $("#legend").hide();
+    }
+  });
+
+  function fileOpen(fileName) {
+    if (fileName === undefined) {
+      console.log('No File')
+    } else {
+
+      console.log("UP UP UP");
+      var fs = new FileReader();
+      fs.readFile(fileName, function (err, data) {
+        if (err) return console.error(err);
+        parse(data, {comment: '#'}, function(err, output){
+          if (err) return console.error(err);
+          // ready to paste new items from file
+          // mainWindow.webContents.send('item:clear');
+
+          output.forEach(function(row) {
+            console.log(row);
+            // currentBacklog.push(row[0] + ',' + row[1] + ',' + row[2] + ',' + row[3] + ',' + row[4] + '\n');
+            // mainWindow.webContents.send('item:add', row)
+          });
+      });
+   });
+
+  }
+};
+
+
+$("#imgBacklog").on('click', function(e) {
+  $("#backlog").show();
+  $("#arrangement").hide();
+  $("#sadv").hide();
+  console.log("show");
+});
+
+$("#imgTimeline").on('click', function(e) {
+  $("#backlog").hide();
+  $("#arrangement").show();
+  $("#sadv").show();
+  console.log("hide");
+});
+
+
+function upload(files){
+    for (let i = 0; i < files.length; i++) {
+      console.log(files[i]);
+      fileOpen(files[i]);
+    }
+}
+
+
+
+</script>
+
+
+</html>
