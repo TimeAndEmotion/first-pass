@@ -27,7 +27,13 @@
   <!-- Insert this line after script imports -->
   <!-- <script>if (window.module) module = window.module;</script> -->
 
-
+<style>
+  #drag-file {
+  border: 5px dashed black;
+  width:  200px;
+  height: 100px;
+}
+</style>
 
 </head>
 
@@ -83,9 +89,9 @@
     <P></P>
 
     <!-- Start of app -->
-    <!-- <div id="drag-file">
+    <div id="drag-file"  ondrop="dropHandler(event);" >
       <p>Drag your files here</p>
-    </div> -->
+    </div>
     <P></P>
     <div class="row">
       <div class="col col-lg-3">
@@ -172,101 +178,11 @@
         </thead>
         <tbody>
 
-
           <tr>
-            <td>1</td>
-            <td>Remove Ingredients Link from PDX on Procudtion branch</td>
-            <td class="text-center">M</td>
-            <td class="text-right">3</td>
-            <td>
-              <select class="payments" style="width:300px;">
-                <option selected value="0" data-image="./images/blank.png" data-description=""></option>
-                <option value="1" data-image="./images/mallet.png" data-description="">Fast, no value</option>
-                <option value="2" data-image="./images/bass.png">Medium Design & effort. No value</option>
-                <option value="3" data-image="./images/keyboards.png" data-description="">Long, no value</option>
-                <option value="4" data-image="./images/guitar.png" data-description="">Chore</option>
-
-                <option value="5" data-image="./images/drum.png" data-description="">Non Functional Requirement</option>
-                <option value="6" data-image="./images/strings.png" data-description="">Design and Value #1</option>
-                <option value="7" data-image="./images/horns.png" data-description="">Design and Value #2</option>
-                <option value="8" data-image="./images/woodwind.png" data-description="">Design and Value #3</option>
-
-                <option value="9" data-image="./images/synth-basic.png" data-description="">Generic</option>
-                <option value="10" data-image="./images/synth-lead.png" data-description="">Spike</option>
-                <option value="11" data-image="./images/synth-pad.png" data-description="">High Effort & Value</option>
-                <option value="12" data-image="./images/synth-texture.png" data-description="">At the Max</option>
-
-              </select>
-            </td>
-            <td><input type="text" width="4" name="cplx_1" value=0 class="form-control text-right"></input></td>
-            <td><input type="text" width="4" name="cplx_1" value=0 class="form-control text-right col-lg-1"></input></td>
-          </tr>
-
-          <tr>
-            <td>2</td>
-            <td>Redirect Tool - Create, Edit And Delete Redirect</td>
-            <td class="text-center">S</td>
-            <td class="text-right">2</td>
-            <td>
-              <select class="payments" style="width:300px;">
-                <option selected value="0" data-image="./images/blank.png" data-description=""></option>
-                <option value="1" data-image="./images/mallet.png" data-description="">Fast, no value</option>
-                <option value="2" data-image="./images/bass.png">Medium Design & effort. No value</option>
-                <option value="3" data-image="./images/keyboards.png" data-description="">Long, no value</option>
-                <option value="4" data-image="./images/guitar.png" data-description="">Chore</option>
-
-                <option value="5" data-image="./images/drum.png" data-description="">Non Functional Requirement</option>
-                <option value="6" data-image="./images/strings.png" data-description="">Design and Value #1</option>
-                <option value="7" data-image="./images/horns.png" data-description="">Design and Value #2</option>
-                <option value="8" data-image="./images/woodwind.png" data-description="">Design and Value #3</option>
-
-                <option value="9" data-image="./images/synth-basic.png" data-description="">Generic</option>
-                <option value="10" data-image="./images/synth-lead.png" data-description="">Spike</option>
-                <option value="11" data-image="./images/synth-pad.png" data-description="">High Effort & Value</option>
-                <option value="12" data-image="./images/synth-texture.png" data-description="">At the Max</option>
-
-              </select>
-            </td>
-            <td><input type="text" width="4" name="cplx_2" value=0 class="form-control text-right"></input></td>
-            <td><input type="text" width="4" name="cplx_2" value=0 class="form-control text-right"></input></td>
-          </tr>
-
-          <tr>
-            <td>3</td>
-            <td>Standalone Admin Site - Log In Functionality</td>
-            <td class="text-center">C</td>
-            <td class="text-right">3</td>
-            <td>
-              <select class="payments" style="width:300px;">
-                <option selected value="0" data-image="./images/blank.png" data-description=""></option>
-                <option value="1" data-image="./images/mallet.png" data-description="">Fast, no value</option>
-                <option value="2" data-image="./images/bass.png">Medium Design & effort. No value</option>
-                <option value="3" data-image="./images/keyboards.png" data-description="">Long, no value</option>
-                <option value="4" data-image="./images/guitar.png" data-description="">Chore</option>
-
-                <option value="5" data-image="./images/drum.png" data-description="">Non Functional Requirement</option>
-                <option value="6" data-image="./images/strings.png" data-description="">Design and Value #1</option>
-                <option value="7" data-image="./images/horns.png" data-description="">Design and Value #2</option>
-                <option value="8" data-image="./images/woodwind.png" data-description="">Design and Value #3</option>
-
-                <option value="9" data-image="./images/synth-basic.png" data-description="">Generic</option>
-                <option value="10" data-image="./images/synth-lead.png" data-description="">Spike</option>
-                <option value="11" data-image="./images/synth-pad.png" data-description="">High Effort & Value</option>
-                <option value="12" data-image="./images/synth-texture.png" data-description="">At the Max</option>
-
-              </select>
-            </td>
-            <td><input type="text" width="4" name="cplx_3" value=0 class="form-control text-right"></input></td>
-            <td><input type="text" width="4" name="cplx_3" value=0 class="form-control text-right"></input></td>
-          </tr>
-
-
-
-          <tr>
-            <td>4</td>
-            <td>Checkout Error Message Copy to be Updated</td>
-            <td class="text-center">W</td>
-            <td class="text-right">3</td>
+            <td>NEO-3012</td>
+            <td>Move of non-productive DELDB from NUE to FRA</td>
+            <td class="text-center">Task</td>
+            <td class="text-right"></td>
             <td>
               <select class="payments" style="width:300px;">
                 <option selected value="0" data-image="./images/blank.png" data-description=""></option>
@@ -289,12 +205,13 @@
             </td>
             <td><input type="text"  name="cplx_4" value=0 class="form-control text-right"></input></td>
             <td><input type="text"  name="cplx_4" value=0 class="form-control text-right"></input></td>
-
           </tr>
 
-          <!-- <tr>
-            <td>5</td>
-            <td>A/B Testing - Mini-bag Open on Page Arrival</td>
+           <tr>
+            <td>NEO-2956</td>
+            <td>DIY Client Deliveries Fail</td>
+            <td class="text-center">Task</td>
+            <td class="text-right"></td>
             <td>
               <select class="payments" style="width:300px;">
                 <option selected value="0" data-image="./images/blank.png" data-description=""></option>
@@ -315,44 +232,15 @@
 
               </select>
             </td>
-            <td>0</td>
-            <td>3</td>
-            <td>M</td>
-            <td>3</td>
-          </tr>
-
-          <tr>
-            <td>6</td>
-            <td>Write Vanilla ADSR modeller</td>
-            <td>
-              <select class="payments" style="width:300px;">
-                <option selected value="0" data-image="./images/blank.png" data-description=""></option>
-                <option value="1" data-image="./images/mallet.png" data-description="">Fast, no value</option>
-                <option value="2" data-image="./images/bass.png">Medium Design & effort. No value</option>
-                <option value="3" data-image="./images/keyboards.png" data-description="">Long, no value</option>
-                <option value="4" data-image="./images/guitar.png" data-description="">Chore</option>
-
-                <option value="5" data-image="./images/drum.png" data-description="">Non Functional Requirement</option>
-                <option value="6" data-image="./images/strings.png" data-description="">Design and Value #1</option>
-                <option value="7" data-image="./images/horns.png" data-description="">Design and Value #2</option>
-                <option value="8" data-image="./images/woodwind.png" data-description="">Design and Value #3</option>
-
-                <option value="9" data-image="./images/synth-basic.png" data-description="">Generic</option>
-                <option value="10" data-image="./images/synth-lead.png" data-description="">Spike</option>
-                <option value="11" data-image="./images/synth-pad.png" data-description="">High Effort & Value</option>
-                <option value="12" data-image="./images/synth-texture.png" data-description="">At the Max</option>
-
-              </select>
-            </td>
-            <td>0</td>
-            <td>3</td>
-            <td>M</td>
-            <td>3</td>
+            <td><input type="text"  name="cplx_4" value=0 class="form-control text-right"></input></td>
+            <td><input type="text"  name="cplx_4" value=0 class="form-control text-right"></input></td>
           </tr>
 
           <tr>
-            <td>7</td>
-            <td>Write WSJF modeller</td>
+            <td>NEO-2951</td>
+            <td>Introduce a password vault solution</td>
+            <td class="text-center">Story</td>
+            <td class="text-right"></td>
             <td>
               <select class="payments" style="width:300px;">
                 <option selected value="0" data-image="./images/blank.png" data-description=""></option>
@@ -373,15 +261,44 @@
 
               </select>
             </td>
-            <td>0</td>
-            <td>3</td>
-            <td>M</td>
-            <td>3</td>
+            <td><input type="text"  name="cplx_4" value=0 class="form-control text-right"></input></td>
+            <td><input type="text"  name="cplx_4" value=0 class="form-control text-right"></input></td>
+          </tr>
+
+           <tr>
+            <td>NEO-2950</td>
+            <td>Use New Interface of BI Export Service</td>
+            <td class="text-center">Story</td>
+            <td class="text-right"></td>
+            <td>
+              <select class="payments" style="width:300px;">
+                <option selected value="0" data-image="./images/blank.png" data-description=""></option>
+                <option value="1" data-image="./images/mallet.png" data-description="">Fast, no value</option>
+                <option value="2" data-image="./images/bass.png">Medium Design & effort. No value</option>
+                <option value="3" data-image="./images/keyboards.png" data-description="">Long, no value</option>
+                <option value="4" data-image="./images/guitar.png" data-description="">Chore</option>
+
+                <option value="5" data-image="./images/drum.png" data-description="">Non Functional Requirement</option>
+                <option value="6" data-image="./images/strings.png" data-description="">Design and Value #1</option>
+                <option value="7" data-image="./images/horns.png" data-description="">Design and Value #2</option>
+                <option value="8" data-image="./images/woodwind.png" data-description="">Design and Value #3</option>
+
+                <option value="9" data-image="./images/synth-basic.png" data-description="">Generic</option>
+                <option value="10" data-image="./images/synth-lead.png" data-description="">Spike</option>
+                <option value="11" data-image="./images/synth-pad.png" data-description="">High Effort & Value</option>
+                <option value="12" data-image="./images/synth-texture.png" data-description="">At the Max</option>
+
+              </select>
+            </td>
+            <td><input type="text"  name="cplx_4" value=0 class="form-control text-right"></input></td>
+            <td><input type="text"  name="cplx_4" value=0 class="form-control text-right"></input></td>
           </tr>
 
           <tr>
-            <td>8</td>
-            <td>Add Data Access Layer</td>
+            <td>NEO-2876</td>
+            <td>Improve Efficiency</td>
+            <td class="text-center">Spike</td>
+            <td class="text-right"></td>
             <td>
               <select class="payments" style="width:300px;">
                 <option selected value="0" data-image="./images/blank.png" data-description=""></option>
@@ -402,15 +319,15 @@
 
               </select>
             </td>
-            <td>0</td>
-            <td>3</td>
-            <td>M</td>
-            <td>3</td>
+            <td><input type="text"  name="cplx_4" value=0 class="form-control text-right"></input></td>
+            <td><input type="text"  name="cplx_4" value=0 class="form-control text-right"></input></td>
           </tr>
 
           <tr>
-            <td>9</td>
-            <td>Write time based layout</td>
+            <td>NEO-2819</td>
+            <td>Order Hardware</td>
+            <td class="text-center">Task</td>
+            <td class="text-right"></td>
             <td>
               <select class="payments" style="width:300px;">
                 <option selected value="0" data-image="./images/blank.png" data-description=""></option>
@@ -431,15 +348,15 @@
 
               </select>
             </td>
-            <td>0</td>
-            <td>3</td>
-            <td>M</td>
-            <td>3</td>
+            <td><input type="text"  name="cplx_4" value=0 class="form-control text-right"></input></td>
+            <td><input type="text"  name="cplx_4" value=0 class="form-control text-right"></input></td>
           </tr>
 
           <tr>
-            <td>10</td>
-            <td>Write PolyValue Modeller</td>
+            <td>NEO-2818</td>
+            <td>Regression Tests Sprint 4</td>
+            <td class="text-center">Story</td>
+            <td class="text-right"></td>
             <td>
               <select class="payments" style="width:300px;">
                 <option selected value="0" data-image="./images/blank.png" data-description=""></option>
@@ -460,15 +377,15 @@
 
               </select>
             </td>
-            <td>0</td>
-            <td>3</td>
-            <td>M</td>
-            <td>3</td>
+            <td><input type="text"  name="cplx_4" value=0 class="form-control text-right"></input></td>
+            <td><input type="text"  name="cplx_4" value=0 class="form-control text-right"></input></td>
           </tr>
 
-          <tr>
-            <td>11</td>
-            <td>Write Midi controller</td>
+           <tr>
+            <td>NEO-2817</td>
+            <td>Regression Tests Sprint 3</td>
+            <td class="text-center">Task</td>
+            <td class="text-right"></td>
             <td>
               <select class="payments" style="width:300px;">
                 <option selected value="0" data-image="./images/blank.png" data-description=""></option>
@@ -489,15 +406,15 @@
 
               </select>
             </td>
-            <td>0</td>
-            <td>3</td>
-            <td>M</td>
-            <td>3</td>
+            <td><input type="text"  name="cplx_4" value=0 class="form-control text-right"></input></td>
+            <td><input type="text"  name="cplx_4" value=0 class="form-control text-right"></input></td>
           </tr>
 
-          <tr>
-            <td>12</td>
-            <td>Three meetings and lunch</td>
+           <tr>
+            <td>NEO-2816</td>
+            <td>Regression Tests Sprint 2</td>
+            <td class="text-center">Story</td>
+            <td class="text-right"></td>
             <td>
               <select class="payments" style="width:300px;">
                 <option selected value="0" data-image="./images/blank.png" data-description=""></option>
@@ -518,11 +435,303 @@
 
               </select>
             </td>
-            <td>0</td>
-            <td>3</td>
-            <td>M</td>
-            <td>3</td>
-          </tr> -->
+            <td><input type="text"  name="cplx_4" value=0 class="form-control text-right"></input></td>
+            <td><input type="text"  name="cplx_4" value=0 class="form-control text-right"></input></td>
+          </tr>
+
+           <tr>
+            <td>NEO-2806</td>
+            <td>Implement logging</td>
+            <td class="text-center">Story</td>
+            <td class="text-right"></td>
+            <td>
+              <select class="payments" style="width:300px;">
+                <option selected value="0" data-image="./images/blank.png" data-description=""></option>
+                <option value="1" data-image="./images/mallet.png" data-description="">Fast, no value</option>
+                <option value="2" data-image="./images/bass.png">Medium Design & effort. No value</option>
+                <option value="3" data-image="./images/keyboards.png" data-description="">Long, no value</option>
+                <option value="4" data-image="./images/guitar.png" data-description="">Chore</option>
+
+                <option value="5" data-image="./images/drum.png" data-description="">Non Functional Requirement</option>
+                <option value="6" data-image="./images/strings.png" data-description="">Design and Value #1</option>
+                <option value="7" data-image="./images/horns.png" data-description="">Design and Value #2</option>
+                <option value="8" data-image="./images/woodwind.png" data-description="">Design and Value #3</option>
+
+                <option value="9" data-image="./images/synth-basic.png" data-description="">Generic</option>
+                <option value="10" data-image="./images/synth-lead.png" data-description="">Spike</option>
+                <option value="11" data-image="./images/synth-pad.png" data-description="">High Effort & Value</option>
+                <option value="12" data-image="./images/synth-texture.png" data-description="">At the Max</option>
+
+              </select>
+            </td>
+            <td><input type="text"  name="cplx_4" value=0 class="form-control text-right"></input></td>
+            <td><input type="text"  name="cplx_4" value=0 class="form-control text-right"></input></td>
+          </tr>
+
+
+          <tr>
+            <td>NEO-2805</td>
+            <td>Discover Metrics</td>
+            <td class="text-center">Story</td>
+            <td class="text-right"></td>
+            <td>
+              <select class="payments" style="width:300px;">
+                <option selected value="0" data-image="./images/blank.png" data-description=""></option>
+                <option value="1" data-image="./images/mallet.png" data-description="">Fast, no value</option>
+                <option value="2" data-image="./images/bass.png">Medium Design & effort. No value</option>
+                <option value="3" data-image="./images/keyboards.png" data-description="">Long, no value</option>
+                <option value="4" data-image="./images/guitar.png" data-description="">Chore</option>
+
+                <option value="5" data-image="./images/drum.png" data-description="">Non Functional Requirement</option>
+                <option value="6" data-image="./images/strings.png" data-description="">Design and Value #1</option>
+                <option value="7" data-image="./images/horns.png" data-description="">Design and Value #2</option>
+                <option value="8" data-image="./images/woodwind.png" data-description="">Design and Value #3</option>
+
+                <option value="9" data-image="./images/synth-basic.png" data-description="">Generic</option>
+                <option value="10" data-image="./images/synth-lead.png" data-description="">Spike</option>
+                <option value="11" data-image="./images/synth-pad.png" data-description="">High Effort & Value</option>
+                <option value="12" data-image="./images/synth-texture.png" data-description="">At the Max</option>
+
+              </select>
+            </td>
+            <td><input type="text"  name="cplx_4" value=0 class="form-control text-right"></input></td>
+            <td><input type="text"  name="cplx_4" value=0 class="form-control text-right"></input></td>
+          </tr>
+
+         <tr>
+            <td>NEO-2802</td>
+            <td>Regression Tests Sprint 1</td>
+            <td class="text-center">Story</td>
+            <td class="text-right"></td>
+            <td>
+              <select class="payments" style="width:300px;">
+                <option selected value="0" data-image="./images/blank.png" data-description=""></option>
+                <option value="1" data-image="./images/mallet.png" data-description="">Fast, no value</option>
+                <option value="2" data-image="./images/bass.png">Medium Design & effort. No value</option>
+                <option value="3" data-image="./images/keyboards.png" data-description="">Long, no value</option>
+                <option value="4" data-image="./images/guitar.png" data-description="">Chore</option>
+
+                <option value="5" data-image="./images/drum.png" data-description="">Non Functional Requirement</option>
+                <option value="6" data-image="./images/strings.png" data-description="">Design and Value #1</option>
+                <option value="7" data-image="./images/horns.png" data-description="">Design and Value #2</option>
+                <option value="8" data-image="./images/woodwind.png" data-description="">Design and Value #3</option>
+
+                <option value="9" data-image="./images/synth-basic.png" data-description="">Generic</option>
+                <option value="10" data-image="./images/synth-lead.png" data-description="">Spike</option>
+                <option value="11" data-image="./images/synth-pad.png" data-description="">High Effort & Value</option>
+                <option value="12" data-image="./images/synth-texture.png" data-description="">At the Max</option>
+
+              </select>
+            </td>
+            <td><input type="text"  name="cplx_4" value=0 class="form-control text-right"></input></td>
+            <td><input type="text"  name="cplx_4" value=0 class="form-control text-right"></input></td>
+          </tr>
+
+           <tr>
+            <td>NEO-2798</td>
+            <td>KPIs Alignment</td>
+            <td class="text-center">Story</td>
+            <td class="text-right"></td>
+            <td>
+              <select class="payments" style="width:300px;">
+                <option selected value="0" data-image="./images/blank.png" data-description=""></option>
+                <option value="1" data-image="./images/mallet.png" data-description="">Fast, no value</option>
+                <option value="2" data-image="./images/bass.png">Medium Design & effort. No value</option>
+                <option value="3" data-image="./images/keyboards.png" data-description="">Long, no value</option>
+                <option value="4" data-image="./images/guitar.png" data-description="">Chore</option>
+
+                <option value="5" data-image="./images/drum.png" data-description="">Non Functional Requirement</option>
+                <option value="6" data-image="./images/strings.png" data-description="">Design and Value #1</option>
+                <option value="7" data-image="./images/horns.png" data-description="">Design and Value #2</option>
+                <option value="8" data-image="./images/woodwind.png" data-description="">Design and Value #3</option>
+
+                <option value="9" data-image="./images/synth-basic.png" data-description="">Generic</option>
+                <option value="10" data-image="./images/synth-lead.png" data-description="">Spike</option>
+                <option value="11" data-image="./images/synth-pad.png" data-description="">High Effort & Value</option>
+                <option value="12" data-image="./images/synth-texture.png" data-description="">At the Max</option>
+
+              </select>
+            </td>
+            <td><input type="text"  name="cplx_4" value=0 class="form-control text-right"></input></td>
+            <td><input type="text"  name="cplx_4" value=0 class="form-control text-right"></input></td>
+          </tr>
+
+           <tr>
+            <td>NEO-2796</td>
+            <td>Report Data</td>
+            <td class="text-center">Story</td>
+            <td class="text-right"></td>
+            <td>
+              <select class="payments" style="width:300px;">
+                <option selected value="0" data-image="./images/blank.png" data-description=""></option>
+                <option value="1" data-image="./images/mallet.png" data-description="">Fast, no value</option>
+                <option value="2" data-image="./images/bass.png">Medium Design & effort. No value</option>
+                <option value="3" data-image="./images/keyboards.png" data-description="">Long, no value</option>
+                <option value="4" data-image="./images/guitar.png" data-description="">Chore</option>
+
+                <option value="5" data-image="./images/drum.png" data-description="">Non Functional Requirement</option>
+                <option value="6" data-image="./images/strings.png" data-description="">Design and Value #1</option>
+                <option value="7" data-image="./images/horns.png" data-description="">Design and Value #2</option>
+                <option value="8" data-image="./images/woodwind.png" data-description="">Design and Value #3</option>
+
+                <option value="9" data-image="./images/synth-basic.png" data-description="">Generic</option>
+                <option value="10" data-image="./images/synth-lead.png" data-description="">Spike</option>
+                <option value="11" data-image="./images/synth-pad.png" data-description="">High Effort & Value</option>
+                <option value="12" data-image="./images/synth-texture.png" data-description="">At the Max</option>
+
+              </select>
+            </td>
+            <td><input type="text"  name="cplx_4" value=0 class="form-control text-right"></input></td>
+            <td><input type="text"  name="cplx_4" value=0 class="form-control text-right"></input></td>
+          </tr>
+
+           <tr>
+            <td>NEO-2794</td>
+            <td>Deal with unstable status</td>
+            <td class="text-center">Story</td>
+            <td class="text-right"></td>
+            <td>
+              <select class="payments" style="width:300px;">
+                <option selected value="0" data-image="./images/blank.png" data-description=""></option>
+                <option value="1" data-image="./images/mallet.png" data-description="">Fast, no value</option>
+                <option value="2" data-image="./images/bass.png">Medium Design & effort. No value</option>
+                <option value="3" data-image="./images/keyboards.png" data-description="">Long, no value</option>
+                <option value="4" data-image="./images/guitar.png" data-description="">Chore</option>
+
+                <option value="5" data-image="./images/drum.png" data-description="">Non Functional Requirement</option>
+                <option value="6" data-image="./images/strings.png" data-description="">Design and Value #1</option>
+                <option value="7" data-image="./images/horns.png" data-description="">Design and Value #2</option>
+                <option value="8" data-image="./images/woodwind.png" data-description="">Design and Value #3</option>
+
+                <option value="9" data-image="./images/synth-basic.png" data-description="">Generic</option>
+                <option value="10" data-image="./images/synth-lead.png" data-description="">Spike</option>
+                <option value="11" data-image="./images/synth-pad.png" data-description="">High Effort & Value</option>
+                <option value="12" data-image="./images/synth-texture.png" data-description="">At the Max</option>
+
+              </select>
+            </td>
+            <td><input type="text"  name="cplx_4" value=0 class="form-control text-right"></input></td>
+            <td><input type="text"  name="cplx_4" value=0 class="form-control text-right"></input></td>
+          </tr>
+
+
+          <tr>
+            <td>NEO-2781</td>
+            <td>Update to newer spring boot version</td>
+            <td class="text-center">Story</td>
+            <td class="text-right"></td>
+            <td>
+              <select class="payments" style="width:300px;">
+                <option selected value="0" data-image="./images/blank.png" data-description=""></option>
+                <option value="1" data-image="./images/mallet.png" data-description="">Fast, no value</option>
+                <option value="2" data-image="./images/bass.png">Medium Design & effort. No value</option>
+                <option value="3" data-image="./images/keyboards.png" data-description="">Long, no value</option>
+                <option value="4" data-image="./images/guitar.png" data-description="">Chore</option>
+
+                <option value="5" data-image="./images/drum.png" data-description="">Non Functional Requirement</option>
+                <option value="6" data-image="./images/strings.png" data-description="">Design and Value #1</option>
+                <option value="7" data-image="./images/horns.png" data-description="">Design and Value #2</option>
+                <option value="8" data-image="./images/woodwind.png" data-description="">Design and Value #3</option>
+
+                <option value="9" data-image="./images/synth-basic.png" data-description="">Generic</option>
+                <option value="10" data-image="./images/synth-lead.png" data-description="">Spike</option>
+                <option value="11" data-image="./images/synth-pad.png" data-description="">High Effort & Value</option>
+                <option value="12" data-image="./images/synth-texture.png" data-description="">At the Max</option>
+
+              </select>
+            </td>
+            <td><input type="text"  name="cplx_4" value=0 class="form-control text-right"></input></td>
+            <td><input type="text"  name="cplx_4" value=0 class="form-control text-right"></input></td>
+          </tr>
+
+           <tr>
+            <td>NEO-2778</td>
+            <td>Configure application to push events to Elk stack</td>
+            <td class="text-center">Story</td>
+            <td class="text-right"></td>
+            <td>
+              <select class="payments" style="width:300px;">
+                <option selected value="0" data-image="./images/blank.png" data-description=""></option>
+                <option value="1" data-image="./images/mallet.png" data-description="">Fast, no value</option>
+                <option value="2" data-image="./images/bass.png">Medium Design & effort. No value</option>
+                <option value="3" data-image="./images/keyboards.png" data-description="">Long, no value</option>
+                <option value="4" data-image="./images/guitar.png" data-description="">Chore</option>
+
+                <option value="5" data-image="./images/drum.png" data-description="">Non Functional Requirement</option>
+                <option value="6" data-image="./images/strings.png" data-description="">Design and Value #1</option>
+                <option value="7" data-image="./images/horns.png" data-description="">Design and Value #2</option>
+                <option value="8" data-image="./images/woodwind.png" data-description="">Design and Value #3</option>
+
+                <option value="9" data-image="./images/synth-basic.png" data-description="">Generic</option>
+                <option value="10" data-image="./images/synth-lead.png" data-description="">Spike</option>
+                <option value="11" data-image="./images/synth-pad.png" data-description="">High Effort & Value</option>
+                <option value="12" data-image="./images/synth-texture.png" data-description="">At the Max</option>
+
+              </select>
+            </td>
+            <td><input type="text"  name="cplx_4" value=0 class="form-control text-right"></input></td>
+            <td><input type="text"  name="cplx_4" value=0 class="form-control text-right"></input></td>
+          </tr>
+
+         <tr>
+            <td>NEO-2687</td>
+            <td>Clients Migration</td>
+            <td class="text-center">Story</td>
+            <td class="text-right"></td>
+            <td>
+              <select class="payments" style="width:300px;">
+                <option selected value="0" data-image="./images/blank.png" data-description=""></option>
+                <option value="1" data-image="./images/mallet.png" data-description="">Fast, no value</option>
+                <option value="2" data-image="./images/bass.png">Medium Design & effort. No value</option>
+                <option value="3" data-image="./images/keyboards.png" data-description="">Long, no value</option>
+                <option value="4" data-image="./images/guitar.png" data-description="">Chore</option>
+
+                <option value="5" data-image="./images/drum.png" data-description="">Non Functional Requirement</option>
+                <option value="6" data-image="./images/strings.png" data-description="">Design and Value #1</option>
+                <option value="7" data-image="./images/horns.png" data-description="">Design and Value #2</option>
+                <option value="8" data-image="./images/woodwind.png" data-description="">Design and Value #3</option>
+
+                <option value="9" data-image="./images/synth-basic.png" data-description="">Generic</option>
+                <option value="10" data-image="./images/synth-lead.png" data-description="">Spike</option>
+                <option value="11" data-image="./images/synth-pad.png" data-description="">High Effort & Value</option>
+                <option value="12" data-image="./images/synth-texture.png" data-description="">At the Max</option>
+
+              </select>
+            </td>
+            <td><input type="text"  name="cplx_4" value=0 class="form-control text-right"></input></td>
+            <td><input type="text"  name="cplx_4" value=0 class="form-control text-right"></input></td>
+          </tr>
+
+           <tr>
+            <td>NEO-2526</td>
+            <td>Optimize Aerospace Deleter LUA script</td>
+            <td class="text-center">Story</td>
+            <td class="text-right"></td>
+            <td>
+              <select class="payments" style="width:300px;">
+                <option selected value="0" data-image="./images/blank.png" data-description=""></option>
+                <option value="1" data-image="./images/mallet.png" data-description="">Fast, no value</option>
+                <option value="2" data-image="./images/bass.png">Medium Design & effort. No value</option>
+                <option value="3" data-image="./images/keyboards.png" data-description="">Long, no value</option>
+                <option value="4" data-image="./images/guitar.png" data-description="">Chore</option>
+
+                <option value="5" data-image="./images/drum.png" data-description="">Non Functional Requirement</option>
+                <option value="6" data-image="./images/strings.png" data-description="">Design and Value #1</option>
+                <option value="7" data-image="./images/horns.png" data-description="">Design and Value #2</option>
+                <option value="8" data-image="./images/woodwind.png" data-description="">Design and Value #3</option>
+
+                <option value="9" data-image="./images/synth-basic.png" data-description="">Generic</option>
+                <option value="10" data-image="./images/synth-lead.png" data-description="">Spike</option>
+                <option value="11" data-image="./images/synth-pad.png" data-description="">High Effort & Value</option>
+                <option value="12" data-image="./images/synth-texture.png" data-description="">At the Max</option>
+
+              </select>
+            </td>
+            <td><input type="text"  name="cplx_4" value=0 class="form-control text-right"></input></td>
+            <td><input type="text"  name="cplx_4" value=0 class="form-control text-right"></input></td>
+          </tr>
+
+
         </tbody>
       </table>
       <P></P>
@@ -789,4 +998,32 @@
 </script>
 
 
+<script>
+  // Drag and drop functions
+  function dropHandler(ev) {
+    console.log('File(s) dropped');
+
+    // Prevent default behavior (Prevent file from being opened)
+    // ev.preventDefault();
+
+    // if (ev.dataTransfer.items) {
+    //   // Use DataTransferItemList interface to access the file(s)
+    //   for (var i = 0; i < ev.dataTransfer.items.length; i++) {
+    //     // If dropped items aren't files, reject them
+    //     if (ev.dataTransfer.items[i].kind === 'file') {
+    //       var file = ev.dataTransfer.items[i].getAsFile();
+    //       console.log('... file[' + i + '].name = ' + file.name);
+    //     }
+    //   }
+    // } else {
+    //   // Use DataTransfer interface to access the file(s)
+    //   for (var i = 0; i < ev.dataTransfer.files.length; i++) {
+    //     console.log('... file[' + i + '].name = ' + ev.dataTransfer.files[i].name);
+    //   }
+    // }
+
+    // // Pass event to removeDragData for cleanup
+    // removeDragData(ev)
+  }
+</script>
 </html>
