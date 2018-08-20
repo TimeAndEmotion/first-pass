@@ -1,19 +1,19 @@
-NEO-3012,Move of non-productive DELDB from NUE to FRA,Task
-NEO-2956,DIY Client Deliveries Fail,Task
-NEO-2951,Introduce a password vault solution,Story
-NEO-2950,Use New Interface of BI Export Service,Story
-NEO-2876,Improve Efficiency,Spike
-NEO-2819,Order Hardware,Task
-NEO-2818,Regression Tests Sprint 4,Story
-NEO-2817,Regression Tests Sprint 3,Story
-NEO-2816,Regression Tests Sprint 2,Story
-NEO-2806,Implement logging ,Story
-NEO-2805,Discover Metrics,Story
-NEO-2802,Regression Tests Sprint 1,Story
-NEO-2798,KPIs Alignments,Story
-NEO-2796,Report Data,Story
-NEO-2794,Deal with unstable status,Story
-NEO-2781,Update to a newer spring boot version,Story
-NEO-2778,Configure application to push log events to Elk stack,Story
-NEO-2687,Clients Migration,Story
-NEO-2526,Optimize Areospike Deleter LUA script,Story
+NEO-3012,Move of non-productive DELDB from NUE to FRA,Task,?
+NEO-2956,DIY Client Deliveries Fail,Task,?
+NEO-2951,Introduce a password vault solution,Story,?
+NEO-2950,Use New Interface of BI Export Service,Story,?
+NEO-2876,Improve Efficiency,Spike,?
+NEO-2819,Order Hardware,Task,?
+NEO-2818,Regression Tests Sprint 4,Story,?
+NEO-2817,Regression Tests Sprint 3,Story,?
+NEO-2816,Regression Tests Sprint 2,Story,?
+NEO-2806,Implement logging ,Story,?
+NEO-2805,Discover Metrics,Story,?
+NEO-2802,Regression Tests Sprint 1,Story,?
+NEO-2798,KPIs Alignments,Story,?
+NEO-2796,Report Data,Story,?
+NEO-2794,Deal with unstable status,Story,?
+NEO-2781,Update to a newer spring boot version,Story,?
+NEO-2778,Configure application to push log events to Elk stack,Story,?
+NEO-2687,Clients Migration,Story,?
+NEO-2526,Optimize Areospike Deleter LUA script,Story,?
